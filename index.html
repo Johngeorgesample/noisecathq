@@ -69,13 +69,41 @@
   .v4 h2 { font-size: clamp(26px, 3.4vw, 38px); letter-spacing: -0.02em; margin: 0 0 10px; }
   .v4 .sec { padding: 56px 0; }
   .v4 .sec > .wrap > p { color: #5c4f80; max-width: 640px; margin: 0 0 32px; font-size: 18px; }
-  .v4 .products { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-  .v4 .prod { border: 1px solid #e8e3f3; border-radius: 8px; padding: 22px; transition: border-color 150ms ease-out, transform 150ms ease-out; }
-  .v4 .prod:hover { border-color: #632ca6; transform: translateY(-2px); }
-  .v4 .prod .ic { width: 38px; height: 38px; border-radius: 8px; background: #efe7fb; color: #632ca6; display: grid; place-items: center; font-size: 20px; margin-bottom: 12px; }
-  .v4 .prod h3 { margin: 0 0 6px; font-size: 18px; }
-  .v4 .prod p { margin: 0 0 10px; color: #5c4f80; font-size: 15px; }
-  .v4 .prod a { color: #632ca6; font-weight: 700; font-size: 14px; text-decoration: none; }
+  .ico { width: 40px; height: 40px; border-radius: 10px; background: #efe7fb; color: #632ca6; display: grid; place-items: center; }
+  .ico svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .more { color: #632ca6; font-weight: 700; font-size: 14px; text-decoration: none; display: inline-block; }
+  .more span { display: inline-block; transition: transform 150ms ease-out; }
+  a.more:hover span, .hov:hover .more span { transform: translateX(4px); }
+
+  @keyframes drawx { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes ring { from { opacity: 0.7; transform: scale(0.4); } to { opacity: 0; transform: scale(1.4); } }
+
+  .vis { font-size: 13px; }
+  .chip { display: flex; gap: 8px; align-items: center; background: #fff; border: 1px solid #e8e3f3; border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; font: 12px ui-monospace, Menlo, monospace; }
+  .chip b { font-size: 11px; padding: 2px 6px; border-radius: 4px; color: #fff; }
+  .chip b.c { background: #e5484d; } .chip b.w { background: #e0a100; }
+  .num { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; color: #632ca6; line-height: 1; }
+  .num small { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0; color: #6b5c8f; margin-top: 6px; font-family: ui-monospace, Menlo, monospace; }
+  .pagerbox { position: relative; height: 90px; display: grid; place-items: center; }
+  .pagerbox .t { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; z-index: 1; }
+  .pagerbox i { position: absolute; width: 90px; height: 90px; border: 2px solid #8a56d8; border-radius: 50%; animation: ring 700ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: calc(var(--i) * 120ms); }
+  .digest .from { color: #8b7fa8; text-decoration: line-through; }
+  .digest .to { font-size: 20px; font-weight: 800; color: #632ca6; margin-top: 4px; }
+  .svgv { display: block; width: 100%; height: auto; }
+  .svgv .line { transform-origin: left center; animation: drawx 400ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+
+  .f1 .bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .f1 .tile { border: 1px solid #e8e3f3; border-radius: 16px; padding: 24px; background: #fff; display: flex; flex-direction: column; gap: 14px; transition: border-color 150ms ease-out, transform 150ms ease-out; }
+  .f1 .tile:hover { border-color: #632ca6; transform: translateY(-2px); }
+  .f1 .tile.big { background: linear-gradient(160deg, #faf7ff, #f1eafc); }
+  .f1 .tile h3 { margin: 0; font-size: 19px; }
+  .f1 .tile p { margin: 0; color: #5c4f80; font-size: 15px; }
+  .f1 .tile .vis { margin-top: auto; }
+  .f1 .s2 { grid-column: span 2; } .f1 .r2 { grid-row: span 2; }
+  @media (max-width: 860px) { .f1 .bento { grid-template-columns: repeat(2, 1fr); } .f1 .r2 { grid-row: auto; } }
+  @media (max-width: 560px) { .f1 .bento { grid-template-columns: 1fr; } .f1 .s2 { grid-column: auto; } }
+
+  @media (prefers-reduced-motion: reduce) { .vis * { animation: none !important; } }
   .v4 .band { background: #f6f2fc; }
   .v4 .quote { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
   .v4 .quote blockquote { margin: 0; font-size: 24px; line-height: 1.35; letter-spacing: -0.01em; }
@@ -126,13 +154,21 @@
       <p class="rise" style="--i:6">Trusted by teams at fictional companies everywhere</p>
       <div class="names rise" style="--i:7"><span>Four Nines Bank</span><span>Cold Start Labs</span><span>p99 Logistics</span><span>Error Budget Capital</span><span>Noisy Neighbor Hosting</span><span>Head-Based Sampling Co</span></div>
     </div></div>
-    <section class="sec"><div class="wrap">
+    <section class="sec f1"><div class="wrap">
       <h2 class="rise" style="--i:8">One platform. Infinite pings.</h2>
       <p class="rise" style="--i:8">Everything you need to know that something, somewhere, is slightly different than it was a minute ago.</p>
-      <div class="products rise" style="--i:9"><div class="prod"><div class="ic">🔔</div><h3>Alert Fatigue Management</h3><p>Never miss a threshold. Or a non-threshold.</p><a href="#">Learn more →</a></div><div class="prod"><div class="ic">💥</div><h3>Cardinality Explosion</h3><p>Put request_id in a label. We will handle the 40 million series. Your invoice will handle the rest.</p><a href="#">Learn more →</a></div><div class="prod"><div class="ic">📟</div><h3>Pager Pro</h3><p>Escalations that reach you, your partner, and everyone in the building.</p><a href="#">Learn more →</a></div><div class="prod"><div class="ic">🧠</div><h3>Digest AI</h3><p>Turns 900 alerts into one sentence: “Things happened.”</p><a href="#">Learn more →</a></div><div class="prod"><div class="ic">👻</div><h3>Staleness Markers</h3><p>Your target vanished and the graph says nothing. “No data” is the new green.</p><a href="#">Learn more →</a></div><div class="prod"><div class="ic">🗺️</div><h3>Service Map</h3><p>A zoomable hairball of everything depending on everything.</p><a href="#">Learn more →</a></div></div>
+      <div class="bento"><div class="tile s2 r2 big rise hov" style="--i:1"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0112 0v5l1.5 2h-15zM10 20a2 2 0 004 0"/></svg></span><h3>Alert Fatigue Management</h3><p>Never miss a threshold. Or a non-threshold.</p><div class="vis">
+      <div class="chip rise" style="--i:0"><b class="c">CRIT</b>cpu.usage &gt; 0.2% on host-001</div>
+      <div class="chip rise" style="--i:1"><b class="w">WARN</b>disk.free is fine (are we sure?)</div>
+      <div class="chip rise" style="--i:2"><b class="c">CRIT</b>alert-about-alerts.rate exceeded</div></div><a class="more" href="#">Learn more <span>→</span></a></div><div class="tile s2 rise hov" style="--i:2"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v5M12 16v5M3 12h5M16 12h5M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3"/></svg></span><h3>Cardinality Explosion</h3><p>Put request_id in a label. We will handle the 40 million series. Your invoice will handle the rest.</p><div class="vis"><div class="num rise" style="--i:0">40,000,000<small>active series · label: request_id</small></div></div><a class="more" href="#">Learn more <span>→</span></a></div><div class="tile  rise hov" style="--i:3"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h8M8 14h4"/></svg></span><h3>Pager Pro</h3><p>Escalations that reach you, your partner, and everyone in the building.</p><div class="vis pagerbox"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><span class="t">3:12 AM</span></div><a class="more" href="#">Learn more <span>→</span></a></div><div class="tile  rise hov" style="--i:4"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg></span><h3>Digest AI</h3><p>Turns 900 alerts into one sentence: “Things happened.”</p><div class="vis digest"><div class="from rise" style="--i:0">900 alerts</div><div class="to rise" style="--i:1">“Things happened.”</div></div><a class="more" href="#">Learn more <span>→</span></a></div><div class="tile s2 rise hov" style="--i:5"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6zM4 4l16 16"/></svg></span><h3>Staleness Markers</h3><p>Your target vanished and the graph says nothing. “No data” is the new green.</p><div class="vis"><svg class="svgv" viewBox="0 0 240 70" role="img" aria-label="Graph that stops mid-way">
+      <polyline class="line" points="0,50 24,44 48,48 72,30 96,36 120,24" fill="none" stroke="#8a56d8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="132" y1="35" x2="240" y2="35" stroke="#cfc4e6" stroke-width="2" stroke-dasharray="3 5"/>
+      <text x="136" y="30" font-size="11" fill="#8b7fa8" font-family="ui-monospace, Menlo, monospace">No data</text></svg></div><a class="more" href="#">Learn more <span>→</span></a></div><div class="tile s2 rise hov" style="--i:6"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14M15 6v14"/></svg></span><h3>Service Map</h3><p>A zoomable hairball of everything depending on everything.</p><div class="vis"><svg class="svgv" viewBox="0 0 240 90" role="img" aria-label="Tangled service map">
+      <g stroke="#c9b8ec" stroke-width="1.5"><line x1="30" y1="45" x2="90" y2="20"/><line x1="30" y1="45" x2="90" y2="70"/><line x1="90" y1="20" x2="150" y2="45"/><line x1="90" y1="70" x2="150" y2="45"/><line x1="90" y1="20" x2="90" y2="70"/><line x1="150" y1="45" x2="210" y2="20"/><line x1="150" y1="45" x2="210" y2="70"/><line x1="30" y1="45" x2="150" y2="45"/><line x1="90" y1="70" x2="210" y2="20"/><line x1="210" y1="20" x2="210" y2="70"/></g>
+      <g fill="#632ca6"><circle cx="30" cy="45" r="7"/><circle cx="90" cy="20" r="7"/><circle cx="90" cy="70" r="7"/><circle cx="150" cy="45" r="7"/><circle cx="210" cy="20" r="7"/><circle cx="210" cy="70" r="7"/></g></svg></div><a class="more" href="#">Learn more <span>→</span></a></div></div>
     </div></section>
     <section class="sec band"><div class="wrap quote">
-      <div><blockquote>“The dashboard is green. The exporter has been dead since Tuesday.”</blockquote><cite>A fictional SRE, learning this the hard way</cite></div>
+      <div><blockquote>“The dashboard is green. The exporter has been dead since Tuesday.”</blockquote><cite>SRE, rotated off call 4 minutes ago</cite></div>
       <div class="stat">
         <div><b>99.99%</b><span>of alerts are “worth a look”</span></div>
         <div><b>3:12 AM</b><span>peak engagement time</span></div>
